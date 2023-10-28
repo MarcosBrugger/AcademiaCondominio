@@ -2,26 +2,25 @@ package model;
 
 public class Agenda {
 
-	private int idagenda;
+	private Long id;
 	private String data;
 	private String hora;
 	
 	
-	public Agenda() {
-		super();
-		// TODO Auto-generated constructor stub
+	public boolean ehNovo() {
+		if (this.id == null) {
+			return true;
+		}else if (this.id != null && this.id > 0) {
+			return false;
+		}
+		return id == null;
+}
+	
+	public Long getId() {
+		return id;
 	}
-	public Agenda(int idagenda, String data, String hora) {
-		super();
-		this.idagenda = idagenda;
-		this.data = data;
-		this.hora = hora;
-	}
-	public int getIdagenda() {
-		return idagenda;
-	}
-	public void setIdagenda(int idagenda) {
-		this.idagenda = idagenda;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public String getData() {
 		return data;
@@ -35,5 +34,4 @@ public class Agenda {
 	public void setHora(String hora) {
 		this.hora = hora;
 	}
-	
 }

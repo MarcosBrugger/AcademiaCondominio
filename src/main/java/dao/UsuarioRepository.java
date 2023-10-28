@@ -101,7 +101,7 @@ public class UsuarioRepository {
 				listaUsuario.add(user01);
 			}
 			return listaUsuario;
-		}
+		}		
 		
 		public Usuario consultarUsuarioID(String id) throws Exception{
 			Usuario user01 = new Usuario();
@@ -116,5 +116,22 @@ public class UsuarioRepository {
 				user01.setApartamento(rst.getString("apartamento"));
 			}
 			return user01;
+		}
+		
+		public List<Usuario> listaUsuario(String id) throws Exception{
+			List<Usuario> listaUsuario = new ArrayList<Usuario>();
+			String sql = "SELECT * FROM usuario";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet rst = stmt.executeQuery();
+			while (rst.next()) {
+				Usuario user01 = new Usuario();
+				user01.setId(rst.getLong("id"));
+				user01.setUsuario(rst.getString("usuario"));
+				user01.setSenha(rst.getString("senha"));
+				user01.setApartamento(rst.getString("apartamento"));
+				
+				listaUsuario.add(user01);
+			}
+			return listaUsuario;
 		}
 }

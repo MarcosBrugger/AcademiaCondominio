@@ -52,7 +52,7 @@ public class FilterPainel extends HttpFilter implements Filter {
 			String urlAutenticar = req.getServletPath();
 			
 			if (usuarioLogado == null && !urlAutenticar.equalsIgnoreCase("/painel/ServletOi")) {
-				RequestDispatcher redireciona = request.getRequestDispatcher("/login");
+				RequestDispatcher redireciona = request.getRequestDispatcher("/index");
 				request.setAttribute("msg", "Por Favor efetue o Login!!!");
 				redireciona.forward(request, response);
 				return;
@@ -64,7 +64,7 @@ public class FilterPainel extends HttpFilter implements Filter {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			RequestDispatcher redireciona = request.getRequestDispatcher("erros.jsp");
+			RequestDispatcher redireciona = request.getRequestDispatcher("painel/erros.jsp");
 			request.setAttribute("msg", e.getMessage());
 			redireciona.forward(request, response);
 			try {

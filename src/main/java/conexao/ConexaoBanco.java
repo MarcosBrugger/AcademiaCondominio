@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class ConexaoBanco {
-	private static String banco = "jdbc:mysql://localhost:3306/uc9_20221_4";
+	private static String banco = "jdbc:mysql://localhost:3306/uc9_20221_4?useTimezone=true&serverTimezone=UTC";
 	private static String usuario = "usuario";
 	private static String senha = "1a2b3c4d5e6f";
 	private static Connection conn = null;

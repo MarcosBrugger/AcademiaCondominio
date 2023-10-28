@@ -38,4 +38,14 @@
     <servlet-name>ServletUsuario</servlet-name>
     <url-pattern>/ServletUsuario</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletAgenda</display-name>
+    <servlet-name>ServletAgenda</servlet-name>
+    <servlet-class>controller.ServletAgenda</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletAgenda</servlet-name>
+    <url-pattern>/ServletAgenda</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -1,12 +1,5 @@
 package controller;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import model.Usuario;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,6 +7,12 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dao.UsuarioRepository;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import model.Usuario;
 
 
 
@@ -29,6 +28,7 @@ public class ServletUsuario extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	try {
 			String acao = request.getParameter("acao");
+			
 			if (acao != null && !acao.isEmpty() & acao.equalsIgnoreCase("deletar")) {
 				
 				String userId = request.getParameter("id");
@@ -44,7 +44,7 @@ public class ServletUsuario extends HttpServlet {
 				List<Usuario> dadosUsuario = userRepository.consultarUsuarioLista(nome);
 				ObjectMapper mapa = new ObjectMapper();
 				String json = mapa.writeValueAsString(dadosUsuario);
-				response.getWriter().write(json);
+				response.getWriter().write(json);			
 				
 			}else if(acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("buscarEditar")) {
 				
@@ -54,6 +54,14 @@ public class ServletUsuario extends HttpServlet {
 				request.setAttribute("msg", "Usuário em Edição!!!");
 				request.setAttribute("user01", user01);
 				request.getRequestDispatcher("painel/inicio.jsp").forward(request, response);
+				
+			}else if(acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("listarAjax")) {
+				
+				String id = request.getParameter("id");
+				List<Usuario> dadosUsuario = userRepository.listaUsuario(id);
+				ObjectMapper mapa = new ObjectMapper();
+				String json = mapa.writeValueAsString(dadosUsuario);
+				response.getWriter().write(json);
 				
 			}else {
 				request.getRequestDispatcher("painel/inicio.jsp").forward(request, response);
@@ -107,7 +115,7 @@ public class ServletUsuario extends HttpServlet {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			RequestDispatcher redireciona = request.getRequestDispatcher("erros.jsp");
+			RequestDispatcher redireciona = request.getRequestDispatcher("painel/erros.jsp");
 			request.setAttribute("msg", e.getMessage());
 			redireciona.forward(request, response);
 		}
